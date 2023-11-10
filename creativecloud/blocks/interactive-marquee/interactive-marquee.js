@@ -67,7 +67,10 @@ export default async function init(el) {
   const media = mediaElements[0];
   if (media) {
     const interactiveBox = createTag('div', { class: 'interactive-container' });
-    interactiveBox.appendChild(media);
+    mediaElements.forEach((mediaDiv) => {
+      interactiveBox.appendChild(mediaDiv);
+    });
+    // interactiveBox.appendChild([...mediaElements]);
     media.classList.add('media');
     foreground.appendChild(interactiveBox);
     const childNodes = media.querySelectorAll('p');
@@ -86,4 +89,11 @@ export default async function init(el) {
   decorateButtons(text, 'button-l');
   decorateText(text);
   extendButtonsClass(text);
+
+  // genfill variant
+  if (el.classList.contains('genfill')) {
+    const { decorateOnlyDesktop } = await import('../../features/genfill.js');
+    // decorateGenfill2(el);
+    decorateOnlyDesktop(el);
+  }
 }

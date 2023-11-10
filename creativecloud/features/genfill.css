@@ -1,0 +1,37 @@
+.desktop-media, .tablet-media, .mobile-media {
+  display: none;
+}
+
+.genfill .image {
+  margin: 0;
+}
+
+.genfill .enticement {
+  display: none;
+}
+
+.genfill .delay {
+  display: none;
+}
+
+.genfill .show {
+  display: block;
+}
+
+@media screen and (max-width: 600px) {
+  .mobile-media {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 1200px) {
+  .tablet-media {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .desktop-media {
+    display: block;
+  }
+}

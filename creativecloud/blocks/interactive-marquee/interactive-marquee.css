@@ -1,3 +1,5 @@
+@import '../../features/genfill.css';
+
 .interactive-marquee {
   position: relative;
   color: var(--color-white);
