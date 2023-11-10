@@ -5,35 +5,32 @@ const miloLibs = setLibs('/libs');
 const { decorateButtons, decorateBlockBg } = await import(`${miloLibs}/utils/decorate.js`);
 const { createTag } = await import(`${miloLibs}/utils/utils.js`);
 
-// [headingSize, bodySize, detailSize]
-const blockTypeSizes = {
-  marquee: {
-    small: ['xl', 'm', 'm'],
-    medium: ['xl', 'm', 'm'],
-    large: ['xxl', 'xl', 'l'],
-    xlarge: ['xxl', 'xl', 'l'],
-  },
-};
+// [headingSize, bodySize, detailSize, titlesize]
+const typeSizes = ['xxl', 'xl', 'l', 'xs'];
 
-function decorateText(el, size) {
+function decorateText(el) {
   const headings = el.querySelectorAll('h1, h2, h3, h4, h5, h6');
   const heading = headings[headings.length - 1];
-  const iconTitle = headings.length > 1 ? headings[0] : null;
-  iconTitle?.classList.add('icon-area', 'heading-xs', 'icon-title');
-  const config = blockTypeSizes.marquee[size];
+  const config = typeSizes;
   const decorate = (headingEl, typeSize) => {
     headingEl.classList.add(`heading-${typeSize[0]}`);
     const bodyEl = headingEl.nextElementSibling;
     bodyEl?.classList.add(`body-${typeSize[1]}`);
     bodyEl?.nextElementSibling?.classList.add(`body-${typeSize[1]}`, 'pricing');
-    headingEl.previousElementSibling?.classList.add('icon-area');
+    const sib = headingEl.previousElementSibling;
+    if (sib) {
+      const className = sib.querySelector('img, .icon') ? 'icon-area' : `detail-${typeSize[2]}`;
+      sib.classList.add(className);
+      sib.previousElementSibling?.classList.add('icon-area');
+    }
+    const iconAreaElements = el.querySelector('.icon-area');
+    const iconText = createTag('div', { class: `heading-${typeSize[3]} icon-text` });
+    iconAreaElements.appendChild(iconText);
+    iconAreaElements?.classList.add('icon-area');
+    iconText.innerText = (iconAreaElements.textContent.trim());
+    iconText.previousSibling.textContent = '';
   };
   decorate(heading, config);
-  const iconAreaElements = el.querySelectorAll('.icon-area');
-  const outerDiv = createTag('div', { class: 'icon-container' });
-  outerDiv.appendChild(iconAreaElements[1]);
-  outerDiv.appendChild(iconAreaElements[0]);
-  el.insertBefore(outerDiv, el.children[0]);
 }
 
 function extendButtonsClass(text) {
@@ -68,18 +65,25 @@ export default async function init(el) {
   text.classList.add('text');
   const mediaElements = foreground.querySelectorAll(':scope > div:not([class])');
   const media = mediaElements[0];
-  if (media && !media.querySelector('video, a[href*=".mp4"]')) {
+  if (media) {
     const interactiveBox = createTag('div', { class: 'interactive-container' });
     interactiveBox.appendChild(media);
     media.classList.add('media');
-    decorateImage(media);
     foreground.appendChild(interactiveBox);
+    const childNodes = media.querySelectorAll('p');
+    [...childNodes].forEach(async (child) => {
+      const video = child.querySelector('video, a[href*=".mp4"]');
+      const image = child.querySelector('img');
+      if (image && !video) {
+        decorateImage(child);
+      }
+    });
   }
 
   const firstDivInForeground = foreground.querySelector(':scope > div');
-  if (firstDivInForeground?.classList.contains('media-new')) el.classList.add('row-reversed');
+  if (firstDivInForeground?.classList.contains('media')) el.classList.add('row-reversed');
 
   decorateButtons(text, 'button-l');
-  decorateText(text, 'large');
+  decorateText(text);
   extendButtonsClass(text);
 }
