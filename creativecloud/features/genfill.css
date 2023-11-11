@@ -2,7 +2,7 @@
   display: none;
 }
 
-.genfill .image {
+.genfill .image, .genfill p {
   margin: 0;
 }
 
