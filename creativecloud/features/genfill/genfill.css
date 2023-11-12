@@ -1,0 +1,70 @@
+.desktop-media, .tablet-media, .mobile-media {
+  display: none;
+}
+
+.genfill .image, .genfill p {
+  margin: 0;
+}
+
+.genfill .enticement-detail{
+  display: none;
+}
+
+.genfill .delay-detail {
+  display: none;
+}
+
+.genfill .enticement {
+  position: absolute;
+  top: 40px;
+  right: 600px;
+}
+
+.genfill .arrowtext {
+  margin: 0;
+}
+
+.genfill.light .arrowtext {
+  color: black;
+}
+
+.genfill.dark .arrowtext {
+  color: white;
+}
+
+.genfill .arrow {
+  margin: 0;
+  position: relative;
+  bottom: 18px;
+  right: 50px;
+
+  /* -webkit-transform: scaleX(-1); */
+
+  /* transform: rotate(345deg); */
+}
+
+.genfill .show {
+  display: block;
+}
+
+@media screen and (max-width: 600px) {
+  .mobile-media {
+    display: block;
+  }
+
+  .genfill .enticement {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 1200px) {
+  .tablet-media {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .desktop-media {
+    display: block;
+  }
+}

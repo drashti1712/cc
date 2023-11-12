@@ -1,4 +1,4 @@
-@import '../../features/genfill.css';
+@import '../../features/genfill/genfill.css';
 
 .interactive-marquee {
   position: relative;

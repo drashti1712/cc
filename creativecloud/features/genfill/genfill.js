@@ -1,3 +1,7 @@
+// const { createEnticement } = await import('../enticement/enticement.js');
+
+import createEnticement from '../enticement/enticement.js';
+
 function handleClick(index, imageArray) {
   imageArray[index].style.display = 'none';
   imageArray[(index + 1) % imageArray.length].style.display = 'block';
@@ -20,11 +24,21 @@ function hideImages(imageArray) {
 }
 
 function hideDetails(container) {
-  const svg = container.firstElementChild.children[0];
+  const enticement = container.firstElementChild.children[0];
   const delay = container.firstElementChild.children[1];
-  svg.classList.add('enticement');
-  svg.querySelector('picture').classList.add('arrow-svg');
-  delay.classList.add('delay');
+  enticement.classList.add('enticement-detail');
+  // svg.querySelector('picture').classList.add('arrow-svg');
+  delay.classList.add('delay-detail');
+  // createEnticement(÷)
+  console.log(enticement.innerText);
+  console.log(createEnticement(enticement.innerText));
+}
+
+function addEnticement(container) {
+  const enticementDetail = container.firstElementChild.children[0].innerText;
+  const enticementElement = createEnticement(enticementDetail);
+  enticementElement.classList.add('enticement');
+  container.insertBefore(enticementElement, container.firstElementChild);
 }
 
 function showImages(imageContainer, images) {
@@ -48,7 +62,7 @@ function showImages(imageContainer, images) {
   function startAutocycle() {
     autocycleInterval = setInterval(() => {
       showNextImage();
-    }, 1000); // Change image every 1 second
+    }, 2000); // Change image every 1 second
   }
 
   // Step 3: Implement Click Functionality
@@ -77,6 +91,7 @@ export function decorateGenfill(el) {
   const desktopMedia = interactiveContainer.lastElementChild;
   desktopMedia.classList.add('desktop-media');
 
+  addEnticement(interactiveContainer);
   const desktopPictures = desktopMedia.querySelectorAll('picture:not(.arrow-svg)');
   hideImages(desktopPictures);
   showImages(desktopMedia, desktopPictures);

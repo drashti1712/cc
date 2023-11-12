@@ -93,7 +93,7 @@ export default async function init(el) {
 
   // genfill variant
   if (el.classList.contains('genfill')) {
-    const { decorateGenfill } = await import('../../features/genfill.js');
+    const { decorateGenfill } = await import('../../features/genfill/genfill.js');
     decorateGenfill(el);
   }
 }
