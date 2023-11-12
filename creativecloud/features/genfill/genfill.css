@@ -40,7 +40,7 @@
 
   /* -webkit-transform: scaleX(-1); */
 
-  /* transform: rotate(345deg); */
+  transform: rotate(10deg);
 }
 
 .genfill .show {
