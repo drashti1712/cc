@@ -4,6 +4,7 @@ const miloLibs = setLibs('/libs');
 
 const { decorateButtons, decorateBlockBg } = await import(`${miloLibs}/utils/decorate.js`);
 const { createTag } = await import(`${miloLibs}/utils/utils.js`);
+import decorateGenfill from '../../features/genfill/genfill.js';
 
 // [headingSize, bodySize, detailSize, titlesize]
 const typeSizes = ['xxl', 'xl', 'l', 'xs'];
@@ -93,7 +94,7 @@ export default async function init(el) {
 
   // genfill variant
   if (el.classList.contains('genfill')) {
-    const { decorateGenfill } = await import('../../features/genfill/genfill.js');
+    // const decorateGenfill = await import('../../features/genfill/genfill.js');
     decorateGenfill(el);
   }
 }

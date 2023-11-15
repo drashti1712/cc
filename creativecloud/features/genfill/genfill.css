@@ -1,4 +1,8 @@
-.desktop-media, .tablet-media, .mobile-media {
+.genfill .desktop-media, 
+.genfill .tablet-media, 
+.genfill .mobile-media {
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
   display: none;
 }
 
@@ -10,7 +14,7 @@
   display: none;
 }
 
-.genfill .delay-detail {
+.genfill .timer {
   display: none;
 }
 
@@ -37,9 +41,6 @@
   position: relative;
   bottom: 18px;
   right: 50px;
-
-  /* -webkit-transform: scaleX(-1); */
-
   transform: rotate(10deg);
 }
 
@@ -47,8 +48,17 @@
   display: block;
 }
 
+.genfill .media picture {
+  display: none;
+}
+
 @media screen and (max-width: 600px) {
-  .mobile-media {
+  .genfill .mobile-media picture {
+    display: none;
+  }
+
+  .genfill .media.mobile-media, 
+  .genfill .mobile-media picture:first-child {
     display: block;
   }
 
@@ -58,13 +68,30 @@
 }
 
 @media screen and (min-width: 600px) and (max-width: 1200px) {
-  .tablet-media {
+  /* .genfill .tablet-media {
+    display: block;
+  } */
+
+  .genfill .tablet-media picture {
+    display: none;
+  }
+
+  .genfill .tablet-media, 
+  .genfill .tablet-media picture:first-child {
     display: block;
   }
 }
 
 @media screen and (min-width: 1200px) {
-  .desktop-media {
+  /* .genfill .desktop-media {
+    display: block;
+  } */
+  .genfill .desktop-media picture {
+    display: none;
+  }
+
+  .genfill .desktop-media, 
+  .genfill .desktop-media picture:first-child {
     display: block;
   }
 }

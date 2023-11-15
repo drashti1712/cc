@@ -1,25 +1,45 @@
-// const { createEnticement } = await import('../enticement/enticement.js');
-
 import createEnticement from '../enticement/enticement.js';
 
-function handleClick(index, imageArray) {
-  imageArray[index].style.display = 'none';
-  imageArray[(index + 1) % imageArray.length].style.display = 'block';
+let autocycleInterval = undefined;
+let isImageClicked = false;
+
+let autocycleIndex = 0;
+
+function startAutocycle(interval, pics) {
+  if (isImageClicked) return;
+  // setTimeout(startAutocycle, delay);
+  autocycleInterval = setInterval(() => {
+    // showNextImage();
+
+    autocycleIndex = handleTransition(autocycleIndex, pics);
+    if (autocycleIndex === pics.length - 1) {
+      // stopAutocycle(autocycleInterval);
+      clearInterval(autocycleInterval);
+    }
+  }, interval);
+}
+
+function handleTransition(index, pics) {
+  // event
+  pics[index].style.display = 'none';
+  const nextIndex = (index + 1) % pics.length;
+  pics[nextIndex].style.display = 'block';
+  return nextIndex;
 }
 
 function hideImages(imageArray) {
-  imageArray[0].style.display = 'block';
+  // imageArray[0].style.display = 'block'; //remove - by css
   imageArray.forEach((picture, index) => {
-    if (index !== 0) {
-      picture.style.display = 'none';
-    }
+    // const imgElement = picture.querySelector('img');
+    picture.querySelector('img')?.removeAttribute('loading');
+    // if (index !== 0) {
+    //   picture.style.display = 'none';
+    // }
     picture.onclick = function click() {
-      handleClick(index, imageArray);
-    };
-    const imgElement = picture.querySelector('img');
-    if (imgElement) {
-      imgElement.removeAttribute('loading');
-    }
+      isImageClicked = true;
+      if (autocycleInterval) clearInterval(autocycleInterval);
+      handleTransition(index, imageArray);
+    }; // addEventListener 
   });
 }
 
@@ -27,11 +47,9 @@ function hideDetails(container) {
   const enticement = container.firstElementChild.children[0];
   const delay = container.firstElementChild.children[1];
   enticement.classList.add('enticement-detail');
-  // svg.querySelector('picture').classList.add('arrow-svg');
-  delay.classList.add('delay-detail');
-  // createEnticement(÷)
-  console.log(enticement.innerText);
-  console.log(createEnticement(enticement.innerText));
+  delay.classList.add('timer');
+
+  // remove these
 }
 
 function addEnticement(container) {
@@ -41,66 +59,53 @@ function addEnticement(container) {
   container.insertBefore(enticementElement, container.firstElementChild);
 }
 
-function showImages(imageContainer, images) {
+function handleAutocycle(imageContainer, images, interval, delay) {  
   let currentImageIndex = 0;
   let autocycleInterval;
 
-  function stopAutocycle() {
-    clearInterval(autocycleInterval);
-  }
+  // function stopAutocycle() {
+  //   clearInterval(autocycleInterval);
+  // }
 
-  function showNextImage() {
-    images[currentImageIndex].style.display = 'none';
-    currentImageIndex += 1;
-    images[currentImageIndex].style.display = 'block';
-    if (currentImageIndex >= images.length - 1) {
-      stopAutocycle(autocycleInterval);
-    }
-  }
+  // function showNextImage() {
+  //   images[currentImageIndex].style.display = 'none';
+  //   currentImageIndex += 1;
+  //   images[currentImageIndex].style.display = 'block';
+  //   if (currentImageIndex >= images.length - 1) {
+  //     stopAutocycle(autocycleInterval);
+  //   }
+  // }
 
-  // Step 2: Autocycle Through Images
-  function startAutocycle() {
-    autocycleInterval = setInterval(() => {
-      showNextImage();
-    }, 2000); // Change image every 1 second
-  }
+  
 
-  // Step 3: Implement Click Functionality
-  imageContainer.addEventListener('click', () => {
-    stopAutocycle(); // Stop autocycle when an image is clicked
-    // showNextImage(); // Move to the next image
-  });
-
-  // Start autocycle after a delay of 2 seconds
-  setTimeout(startAutocycle, 2000);
+  // imageContainer.addEventListener('click', () => {
+  //   stopAutocycle();
+  // });
+  // setTimeout(startAutocycle, delay);
 }
 
-// eslint-disable-next-line import/prefer-default-export
-export function decorateGenfill(el) {
+export default function decorateGenfill(el) {
   const interactiveContainer = el.querySelector('.interactive-container');
-
-  hideDetails(interactiveContainer);
-
-  const n = interactiveContainer.children;
-  const mobileMedia = interactiveContainer.firstElementChild;
-  mobileMedia.classList.add('mobile-media');
-
-  const tabletMedia = (n.length > 1) ? interactiveContainer.children[1] : mobileMedia;
-  tabletMedia?.classList.add('tablet-media');
-
-  const desktopMedia = interactiveContainer.lastElementChild;
-  desktopMedia.classList.add('desktop-media');
-
+  hideDetails(interactiveContainer); // to be removed
+  const timer = interactiveContainer.querySelector('.media .timer');
+  const intervalTimer = timer ? timer.innerText.split('|')[0] : 2000;
+  const delayTimer = timer?.length > 1 ? timer.innerText.split('|')[1] : 1000;
+  
+  // get time & remove p tag
+  // set default, return default
+  const viewports = ['mobile', 'tablet', 'desktop'];
+  const mediaElements = interactiveContainer.querySelectorAll('.media');
+  viewports.forEach((viewport, viewportIndex) => {
+    const media = mediaElements[viewportIndex]? mediaElements[viewportIndex] : mediaElements[viewportIndex-1];
+    media.classList.add(`${viewport}-media`);
+    // console.log(mediaElements);
+    const pictures = media.querySelectorAll('picture:not(.arrow-svg)');
+    hideImages(pictures);
+    // showImages(media, pictures, intervalTimer, delayTimer);
+    setTimeout(() => {
+      startAutocycle(intervalTimer, pictures);
+    }, delayTimer);
+    // startAutocycle(intervalTimer, pictures)
+  });
   addEnticement(interactiveContainer);
-  const desktopPictures = desktopMedia.querySelectorAll('picture:not(.arrow-svg)');
-  hideImages(desktopPictures);
-  showImages(desktopMedia, desktopPictures);
-
-  const tabletPictures = tabletMedia.querySelectorAll('picture:not(.arrow-svg)');
-  hideImages(tabletPictures);
-  showImages(tabletMedia, tabletPictures);
-
-  const mobilePictures = mobileMedia.querySelectorAll('picture:not(.arrow-svg)');
-  hideImages(mobilePictures);
-  showImages(mobileMedia, mobilePictures);
 }
