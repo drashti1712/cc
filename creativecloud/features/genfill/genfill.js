@@ -38,8 +38,6 @@ function addEnticement(container) {
   const enticementElement = createEnticement(enticementDetail);
   enticementElement.classList.add('enticement');
   container.insertBefore(enticementElement, container.firstElementChild);
-  // delete enticement p tag
-  // container.firstElementChild.children[0].remove();
 }
 
 
@@ -75,9 +73,6 @@ export default function decorateGenfill(el) {
   
   const timer = interactiveContainer.firstElementChild.children[1];
   const [intervalTime = 2000, delayTime = 1000] = timer?.innerText.split('|');
-
-  // get time & remove p tag
-  // set default, return default
   addEnticement(interactiveContainer);
 
   enticement.remove();
@@ -88,7 +83,7 @@ export default function decorateGenfill(el) {
   const viewports = ['mobile', 'tablet', 'desktop'];
   const mediaElements = interactiveContainer.querySelectorAll('.media');
   viewports.forEach((viewport, viewportIndex) => {
-    const media = mediaElements[viewportIndex]? mediaElements[viewportIndex] : mediaElements[viewportIndex-1];
+    const media = mediaElements[viewportIndex]? mediaElements[viewportIndex] : mediaElements.lastElementChild;
     media.classList.add(`${viewport}-media`);
     if (viewport === 'mobile') {
       removePTags(media);

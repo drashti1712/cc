@@ -68,10 +68,6 @@
 }
 
 @media screen and (min-width: 600px) and (max-width: 1200px) {
-  /* .genfill .tablet-media {
-    display: block;
-  } */
-
   .genfill .tablet-media picture {
     display: none;
   }
@@ -83,9 +79,6 @@
 }
 
 @media screen and (min-width: 1200px) {
-  /* .genfill .desktop-media {
-    display: block;
-  } */
   .genfill .desktop-media picture {
     display: none;
   }
