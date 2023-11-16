@@ -83,7 +83,7 @@ export default function decorateGenfill(el) {
   const viewports = ['mobile', 'tablet', 'desktop'];
   const mediaElements = interactiveContainer.querySelectorAll('.media');
   viewports.forEach((viewport, viewportIndex) => {
-    const media = mediaElements[viewportIndex]? mediaElements[viewportIndex] : mediaElements.lastElementChild;
+    const media = mediaElements[viewportIndex]? mediaElements[viewportIndex] : interactiveContainer.lastElementChild;
     media.classList.add(`${viewport}-media`);
     if (viewport === 'mobile') {
       removePTags(media);
