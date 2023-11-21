@@ -6,50 +6,28 @@
   display: none;
 }
 
-.genfill .image, .genfill p {
-  margin: 0;
-}
-
-.genfill .enticement-detail{
-  display: none;
-}
-
+.genfill .enticement-detail,
+.genfill .enticement-mode,
 .genfill .timer {
   display: none;
 }
 
-.genfill .enticement {
-  position: absolute;
-  top: 40px;
-  right: 550px;
-}
-
-.genfill .arrowtext {
-  margin: 0;
-}
-
-.genfill.light .arrowtext {
-  color: black;
-}
-
-.genfill.dark .arrowtext {
-  color: white;
-}
-
-.genfill .arrow {
-  margin: 0;
-  position: relative;
-  bottom: 18px;
-  right: 50px;
-  transform: rotate(10deg);
-}
-
-.genfill .show {
-  display: block;
-}
-
 .genfill .media picture {
   display: none;
+}
+
+/* Enticement */
+.enticement-arrow {
+  display: none;
+}
+
+.enticement-text {
+  display: none;
+  max-width: 30ch;
+}
+
+.enticement-text.light {
+color: #FFFFFF;
 }
 
 @media screen and (max-width: 600px) {
@@ -76,6 +54,30 @@
   .genfill .tablet-media picture:first-child {
     display: block;
   }
+
+  /* Enticement */
+  .enticement-arrow {
+    width: 49px !important;
+    height: 73px !important;
+    position: absolute;
+    right: 575px;
+    top: -45px;
+    display: block;
+  }
+
+  .enticement-text {
+    position: absolute;
+    right: 345px;
+    top: -60px;
+    width: 240px;
+    display: block;
+    color: #111111;
+
+  }
+
+  .enticement-text.light {
+    color: #FFFFFF;
+  }
 }
 
 @media screen and (min-width: 1200px) {
@@ -86,5 +88,25 @@
   .genfill .desktop-media, 
   .genfill .desktop-media picture:first-child {
     display: block;
+  }
+
+   /* Enticement */
+   .enticement-arrow {
+    width: 49px !important;
+    height: 73px !important;
+    position: absolute;
+    right: 575px;
+    top: -45px;
+    display: block;
+  }
+
+  .enticement-text {
+    position: absolute;
+    right: 345px;
+    top: -60px;
+    width: 240px;
+    display: block;
+    color: #000000;
+
   }
 }

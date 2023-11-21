@@ -3,8 +3,7 @@ import { setLibs } from '../../scripts/utils.js';
 const miloLibs = setLibs('/libs');
 
 const { decorateButtons, decorateBlockBg } = await import(`${miloLibs}/utils/decorate.js`);
-const { createTag } = await import(`${miloLibs}/utils/utils.js`);
-import decorateGenfill from '../../features/genfill/genfill.js';
+const { createTag, loadStyle } = await import(`${miloLibs}/utils/utils.js`);
 
 // [headingSize, bodySize, detailSize, titlesize]
 const typeSizes = ['xxl', 'xl', 'l', 'xs'];
@@ -40,18 +39,8 @@ function extendButtonsClass(text) {
   buttons.forEach((button) => { button.classList.add('button-justified-mobile'); });
 }
 
-const decorateImage = (media) => {
-  media.classList.add('image');
-  const imageLink = media.querySelector('a');
-  const picture = media.querySelector('picture');
-
-  if (imageLink && picture && !imageLink.parentElement.classList.contains('modal-img-link')) {
-    imageLink.textContent = '';
-    imageLink.append(picture);
-  }
-};
-
-export default async function init(el) {
+function interactiveInit(el) {
+  loadStyle('/creativecloud/blocks/interactive-marquee/milo-marquee.css');
   const isLight = el.classList.contains('light');
   if (!isLight) el.classList.add('dark');
   const children = el.querySelectorAll(':scope > div');
@@ -72,17 +61,7 @@ export default async function init(el) {
       mediaDiv.classList.add('media');
       interactiveBox.appendChild(mediaDiv);
     });
-    // interactiveBox.appendChild([...mediaElements]);
-    // media.classList.add('media');
     foreground.appendChild(interactiveBox);
-    const childNodes = media.querySelectorAll('p');
-    [...childNodes].forEach(async (child) => {
-      const video = child.querySelector('video, a[href*=".mp4"]');
-      const image = child.querySelector('img');
-      if (image && !video) {
-        decorateImage(child);
-      }
-    });
   }
 
   const firstDivInForeground = foreground.querySelector(':scope > div');
@@ -91,10 +70,25 @@ export default async function init(el) {
   decorateButtons(text, 'button-l');
   decorateText(text);
   extendButtonsClass(text);
+}
 
-  // genfill variant
-  if (el.classList.contains('genfill')) {
-    // const decorateGenfill = await import('../../features/genfill/genfill.js');
-    decorateGenfill(el);
+export default async function init(el) {
+  switch (true) {
+    case el.classList.contains('genfill'): {
+      interactiveInit(el);
+      const { default: decorateGenfill } = await import('../../features/genfill/genfill-interactive.js');
+      decorateGenfill(el);
+      break;
+    }
+    case el.classList.contains('firefly'): {
+      interactiveInit(el);
+      loadStyle('/creativecloud/features/interactive-elements/interactive-elements.css');
+      const { default: setInteractiveFirefly } = await import('../../features/firefly/firefly-interactive.js');
+      setInteractiveFirefly(el);
+      break;
+    }
+    default:
+      // default case
+      break;
   }
 }
