@@ -3,6 +3,11 @@
   border-radius: 16px;
 }
 
+.interactive-marquee.slider .media {
+  margin: 0;
+  left: 52px;
+}
+
 .slider .enticement-detail {
   display: none;
 }
@@ -14,7 +19,7 @@
   border-radius: 16px;
   display: flex;
   flex-direction: column;
-  background: var(--color-white);
+  background: rgb(48 48 48);
   padding: 24px;
   justify-content: space-between;
   width: 40%;
@@ -23,7 +28,7 @@
 }
 
 label {
-  color: black;
+  color: white;
 }
 
 .options {
@@ -42,8 +47,8 @@ label {
 }
 
 .upload-btn {
-  background-color: black;
-  color:white;
+  background-color: white;
+  color:black;
   height: 40px;
   width: 70%;
   align-self: center;
@@ -69,8 +74,9 @@ label {
      -moz-appearance: none;
           appearance: none;
   border-radius: 0.5em;
+  border: none;
   background-color: rgba(0, 0, 0, 0.1);
-  height: 5px;
+  height: 3px;
   display: block;
   outline: none;
   transition: color 0.05s linear;
@@ -84,8 +90,9 @@ label {
      -moz-appearance: none;
           appearance: none;
   border-radius: 0.5em;
+  border: none;
   background-color: rgba(0, 0, 0, 0.1);
-  height: 5px;
+  height: 3px;
   display: block;
   outline: none;
   transition: color 0.05s linear;
@@ -97,7 +104,7 @@ label {
   height: 20px;
   width: 20px;
   position: relative;
-  top: -6px;
+  top: -8px;
   border-radius: 2em;
   -webkit-appearance: none;
           appearance: none;
@@ -106,7 +113,7 @@ label {
   cursor: move;
   cursor: grab;
   cursor: -webkit-grab;
-  border: 0.4em solid currentColor;
+  /* border: 0.4em solid currentColor; */
   -webkit-transition: border 0.1s ease-in-out, box-shadow 0.2s ease-in-out, transform 0.1s ease-in-out;
   transition: border 0.1s ease-in-out, box-shadow 0.2s ease-in-out, transform 0.1s ease-in-out;
   box-shadow: 0 0.1em 0.1em rgba(0, 0, 0, 0.05);
