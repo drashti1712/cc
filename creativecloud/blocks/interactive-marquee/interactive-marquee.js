@@ -47,6 +47,8 @@ function interactiveInit(el, decorateButtons, decorateBlockBg, createTag) {
   const headline = foreground.querySelector('h1, h2, h3, h4, h5, h6');
   const text = headline.closest('div');
   text.classList.add('text');
+  const firstDivInForeground = foreground.querySelector(':scope > div');
+  if (!firstDivInForeground?.classList.contains('text')) el.classList.add('row-reversed');
   const mediaElements = foreground.querySelectorAll(':scope > div:not([class])');
   const media = mediaElements[0];
   if (media) {
@@ -55,11 +57,9 @@ function interactiveInit(el, decorateButtons, decorateBlockBg, createTag) {
       mediaDiv.classList.add('media');
       interactiveBox.appendChild(mediaDiv);
     });
-    foreground.appendChild(interactiveBox);
+    if (el.classList.contains('row-reversed')) foreground.prepend(interactiveBox);
+    else foreground.appendChild(interactiveBox);
   }
-
-  const firstDivInForeground = foreground.querySelector(':scope > div');
-  if (firstDivInForeground?.classList.contains('media')) el.classList.add('row-reversed');
 
   decorateButtons(text, 'button-xl');
   decorateText(text, createTag);

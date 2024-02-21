@@ -37,6 +37,10 @@
   order: 2;
 }
 
+.interactive-marquee.row-reversed .text {
+  margin: 0;
+}
+
 [dir="rtl"] .interactive-marquee .text {
   margin: 0 auto 0 0;
 }
