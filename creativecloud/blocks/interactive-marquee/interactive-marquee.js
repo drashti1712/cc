@@ -93,6 +93,14 @@ export default async function init(el) {
       await setInteractiveFirefly(el);
       break;
     }
+    case el.classList.contains('slider'): {
+      loadStyle('/creativecloud/blocks/interactive-marquee/milo-marquee.css');
+      loadStyle('/creativecloud/features/slider/slider-interactive.css');
+      interactiveInit(el, decorateButtons, decorateBlockBg, createTag);
+      const { default: decorateSlider } = await import('../../features/slider/slider-interactive.js');
+      await decorateSlider(el);
+      break;
+    }
     default:
       loadStyle('/creativecloud/blocks/interactive-marquee/milo-marquee.css');
       interactiveInit(el, decorateButtons, decorateBlockBg, createTag);

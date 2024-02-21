@@ -70,3 +70,29 @@ export async function createSelectorTray(interactiveSelections, mode) {
   options.lastChild.classList.add('last-button');
   return options;
 }
+
+export async function createSliderTray(sliderSelections, mode) {
+  const { createTag } = await import(`${getLibs()}/utils/utils.js`);
+  const options = createTag('div', { class: 'slider-tray' });
+  [...sliderSelections].forEach(async (option) => {
+    const label = createTag('label', { for: `${option.trim()}` });
+    label.innerText = option.trim();
+    const input1 = createTag('input', { type: 'range', min: '1', max: '100', class: `options ${option.toLowerCase()}` });
+    if (mode === 'light') {
+      input1.classList.add('light');
+      options.classList.add('light');
+    }
+    options.append(label);
+    options.append(input1);
+  });
+  const button = createTag('button', { type: 'button', class: 'options upload-btn' });
+  const span = createTag('span', { class: 'button-text' }, 'Upload an Image');
+  const svgButton = createTag('img', { alt: '', class: 'optionsvg' });
+  svgButton.src = 'https://mwpw-140914--cc--adobecom.hlx.live/drafts/ruchika/svg/text-to-image.svg';
+  // button.innerText = 'Upload an Image';
+  button.prepend(svgButton);
+  button.appendChild(span);
+  options.append(button);
+  options.lastChild.classList.add('last-button');
+  return options;
+}
