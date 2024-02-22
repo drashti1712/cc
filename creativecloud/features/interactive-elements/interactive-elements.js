@@ -71,21 +71,17 @@ export async function createSelectorTray(interactiveSelections, mode) {
   return options;
 }
 
-export async function createSliderTray(sliderSelections, mode) {
+export async function createSliderTray(ss) {
   const { createTag } = await import(`${getLibs()}/utils/utils.js`);
   const options = createTag('div', { class: 'slider-tray' });
-  [...sliderSelections].forEach(async (option) => {
-    const l = createTag('l', { for: `${option.trim()}` });
+  [...ss].forEach(async (option) => {
+    const l = createTag('label', { for: `${option.trim()}` });
     l.innerText = option.trim();
     const input1 = createTag('input', { type: 'range', min: '1', max: '100', class: `options ${option.toLowerCase()}` });
-    if (mode === 'light') {
-      input1.classList.add('light');
-      options.classList.add('light');
-    }
     options.append(l);
     options.append(input1);
   });
-  const uploadl = createTag('l', { for: 'input-file', class: 'options upload-btn' });
+  const uploadl = createTag('label', { for: 'input-file', class: 'options upload-btn' });
   uploadl.innerText = 'Upload an Image';
   const button = createTag('input', { type: 'file' });
   options.append(uploadl, button);

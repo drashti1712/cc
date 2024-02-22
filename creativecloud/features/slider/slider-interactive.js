@@ -41,9 +41,9 @@ export default async function decorateSlider(el) {
   const mode = el.classList.contains('light') ? 'light' : 'dark';
   enticement.remove();
   addEnticement(ic, enticement, mode);
-  const selections = ['Hue', 'Saturation'];
-  const fireflyOptions = await createSliderTray(selections, mode);
+  const ss = ['Hue', 'Saturation'];
+  const fireflyOptions = await createSliderTray(ss);
   fireflyOptions.classList.add('firefly-selectortray');
   media.append(fireflyOptions);
-  sliderEvent(media, selections);
+  sliderEvent(media, ss);
 }
