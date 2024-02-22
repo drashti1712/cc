@@ -85,14 +85,15 @@ export async function createSliderTray(sliderSelections, mode) {
     options.append(label);
     options.append(input1);
   });
-  const button = createTag('button', { type: 'button', class: 'options upload-btn' });
-  const span = createTag('span', { class: 'button-text' }, 'Upload an Image');
-  const svgButton = createTag('img', { alt: '', class: 'optionsvg' });
-  svgButton.src = 'https://mwpw-140914--cc--adobecom.hlx.live/drafts/ruchika/svg/text-to-image.svg';
+  const uploadLabel = createTag('label', { for: 'input-file', class: 'options upload-btn' });
+  uploadLabel.innerText = 'Upload an Image';
+  const button = createTag('input', { type: 'file', accept: 'image.jpeg, image/png, image/jpg', id: 'input-file' });
+  // const svgButton = createTag('img', { alt: '', class: 'optionsvg' });
+  // svgButton.src = 'https://mwpw-140914--cc--adobecom.hlx.live/drafts/ruchika/svg/text-to-image.svg';
   // button.innerText = 'Upload an Image';
-  button.prepend(svgButton);
-  button.appendChild(span);
-  options.append(button);
+  // button.prepend(svgButton);
+  // button.appendChild(span);
+  options.append(uploadLabel, button);
   options.lastChild.classList.add('last-button');
   return options;
 }

@@ -1,3 +1,4 @@
+import { createTag } from '../../scripts/utils.js';
 import { createEnticement, createSliderTray } from '../interactive-elements/interactive-elements.js';
 
 async function addEnticement(container, enticement, mode) {
@@ -7,6 +8,26 @@ async function addEnticement(container, enticement, mode) {
   entcmtEl.classList.add('enticement');
   const mDiv = container.querySelector('.media');
   mDiv.prepend(entcmtEl.cloneNode(true));
+}
+
+function sliderEvent(media, selections) {
+  const image = media.querySelector('picture > img');
+  selections.forEach((sel) => {
+    const sliderEl = media.querySelector(`.${sel.toLowerCase()}`);
+    sliderEl.addEventListener('input', () => {
+      const { value } = sliderEl;
+      switch (sel.toLowerCase()) {
+        case ('hue'):
+          image.style.filter = `hue-rotate(${value}deg)`;
+          break;
+        case ('saturation'):
+          image.style.filter = `saturate(${value}%)`;
+          break;
+        default:
+          break;
+      }
+    });
+  });
 }
 
 export default async function decorateSlider(el) {
@@ -24,8 +45,9 @@ export default async function decorateSlider(el) {
   addEnticement(ic, enticement, mode);
 
   // selector tray
-  const selections = ['Hue', 'Saturation'];
+  const selections = ['Hue', 'Saturation']; // from authoring
   const fireflyOptions = await createSliderTray(selections, mode);
   fireflyOptions.classList.add('firefly-selectortray');
   media.append(fireflyOptions);
+  sliderEvent(media, selections);
 }
