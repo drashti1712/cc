@@ -75,25 +75,20 @@ export async function createSliderTray(sliderSelections, mode) {
   const { createTag } = await import(`${getLibs()}/utils/utils.js`);
   const options = createTag('div', { class: 'slider-tray' });
   [...sliderSelections].forEach(async (option) => {
-    const label = createTag('label', { for: `${option.trim()}` });
-    label.innerText = option.trim();
+    const l = createTag('l', { for: `${option.trim()}` });
+    l.innerText = option.trim();
     const input1 = createTag('input', { type: 'range', min: '1', max: '100', class: `options ${option.toLowerCase()}` });
     if (mode === 'light') {
       input1.classList.add('light');
       options.classList.add('light');
     }
-    options.append(label);
+    options.append(l);
     options.append(input1);
   });
-  const uploadLabel = createTag('label', { for: 'input-file', class: 'options upload-btn' });
-  uploadLabel.innerText = 'Upload an Image';
-  const button = createTag('input', { type: 'file', accept: 'image.jpeg, image/png, image/jpg', id: 'input-file' });
-  // const svgButton = createTag('img', { alt: '', class: 'optionsvg' });
-  // svgButton.src = 'https://mwpw-140914--cc--adobecom.hlx.live/drafts/ruchika/svg/text-to-image.svg';
-  // button.innerText = 'Upload an Image';
-  // button.prepend(svgButton);
-  // button.appendChild(span);
-  options.append(uploadLabel, button);
+  const uploadl = createTag('l', { for: 'input-file', class: 'options upload-btn' });
+  uploadl.innerText = 'Upload an Image';
+  const button = createTag('input', { type: 'file' });
+  options.append(uploadl, button);
   options.lastChild.classList.add('last-button');
   return options;
 }

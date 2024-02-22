@@ -1,4 +1,3 @@
-import { createTag } from '../../scripts/utils.js';
 import { createEnticement, createSliderTray } from '../interactive-elements/interactive-elements.js';
 
 async function addEnticement(container, enticement, mode) {
@@ -32,7 +31,6 @@ function sliderEvent(media, selections) {
 
 export default async function decorateSlider(el) {
   const ic = el.querySelector('.interactive-container');
-  console.log(el);
   const allP = ic.querySelectorAll('.media:first-child p');
   const [pTag] = [...allP].filter((p) => p.querySelector('picture'));
   const media = ic.querySelector('.media');
@@ -43,9 +41,7 @@ export default async function decorateSlider(el) {
   const mode = el.classList.contains('light') ? 'light' : 'dark';
   enticement.remove();
   addEnticement(ic, enticement, mode);
-
-  // selector tray
-  const selections = ['Hue', 'Saturation']; // from authoring
+  const selections = ['Hue', 'Saturation'];
   const fireflyOptions = await createSliderTray(selections, mode);
   fireflyOptions.classList.add('firefly-selectortray');
   media.append(fireflyOptions);
