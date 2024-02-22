@@ -31,6 +31,13 @@ label {
   color: white;
 }
 
+.sat {
+  display: flex;
+  flex-direction: column;
+  background: rgb(48 48 48);
+  padding: 24px; 
+}
+
 .options {
   display: flex;
   flex-direction: column;
@@ -119,7 +126,7 @@ label {
   box-shadow: 0 0.1em 0.1em rgba(0, 0, 0, 0.05);
 }
 
-#input-file {
+.last-button {
   display: none;
 }
 
