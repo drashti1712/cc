@@ -24,7 +24,7 @@
   border: 4px;
 }
 
-.interactive-marquee .asset {
+.interactive-marquee .media {
   max-width: 300px;
   position: relative;
   padding: 0;
@@ -131,7 +131,7 @@
     width: 569px;
   }
 
-  .interactive-marquee .asset {
+  .interactive-marquee .media {
     max-width: 569px;
     top: 35px;
   }
@@ -175,7 +175,7 @@
     margin: 0;
   }
 
-  .interactive-marquee .asset {
+  .interactive-marquee .media {
     top: 91px;
     margin: 0 auto;
   }
