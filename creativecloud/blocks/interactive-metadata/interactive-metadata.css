@@ -1,0 +1,11 @@
+.layer {
+  visibility: hidden;
+}
+
+.layer.show-layer {
+  visibility: visible;
+}
+
+.interactive-metadata {
+  display: none;
+}
