@@ -1,6 +1,5 @@
 import { getLibs } from '../../scripts/utils.js';
 
-// [headingSize, bodySize, detailSize, titlesize]
 const typeSizes = ['xxl', 'xl', 'l', 'xs'];
 
 function decorateText(el, createTag, isMwebMarquee = false) {

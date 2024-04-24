@@ -1,0 +1,11 @@
+{
+  "9-ICBjb25zdCB2aWV3cG9ydHMgPSBbJ3RhYmxldCcsICdkZXNrdG9wJ107": "Enticement not needed for mobile viewport",
+  "85-ICBjb25zdCBoVGV4dCA9IGhlYWRpbmcuaWQ=": "hText is required to create daa-ll attributes for images",
+  "46-ICAgIGlmIChhdXRvQ3ljbGVDb25maWcuaXNJbWFnZUNsaWNrZWQ=": "Stopping autocycle after 1 cycle or on image click",
+  "4-YXN5bmMgZnVuY3Rpb24gYWRkRW50aWNlbWVudChjb250YWluZXIsIGVudGljZW1lbnQsIG1vZGUpIHs=": "/**\n* This function adds the enticement in the provided container\n*\n* @param container - interactive container\n* @param enticement - A string param with enticement details\n* @param mode - light/dark mode for the enticement\n*\n* @example\n*     addEnticement('dark')\n*/",
+  "17-ICBjb25zdCBhbHRUeHQgPSBhbHQ=": "generating analytics specific for each image",
+  "23-ZnVuY3Rpb24gc2V0SW1nQXR0cnMoaW1nLCBzcmMsIGF0dHJzKSB7": "setting alt text, width and height of the new image",
+  "111-ICAgICAgY29uc3Qgc3JjID0gZ2V0SW1nU3JjKHBpYywgdik7": "get source of each image in the vp",
+  "119-ICBzZXRUaW1lb3V0KCgpID0+IHs=": "Starting the autocycle after a set delay",
+  "94-ICBjb25zdCBbaW50ZXJ2YWxUaW1lID0gMjAwMCwgZGVsYXlUaW1lID0gMTAwMF0gPSAodGltZXJWYWx1ZXMgJiYgdGltZXJWYWx1ZXMubGVuZ3RoID4gMSk=": "default INTERVAL = 2000ms, default DELAY = 1000ms"
+}
